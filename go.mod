@@ -1,4 +1,4 @@
-module github.com/jawadcode/quotesbot
+module github.com/jawadcode/quotesbotv2
 
 go 1.15
 

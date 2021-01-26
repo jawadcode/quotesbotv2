@@ -20,7 +20,7 @@ func GetQuote(s *discordgo.Session, m *discordgo.MessageCreate, IDStr string) {
 		return
 	}
 	// Get quote with id of ID
-	err = db.DB.Get(&quote, "SELECT * FROM quotes WHERE id=$1", ID)
+	err = db.DB.Get(&quote, "SELECT id, guild_id, channel_id, message_id, content, author, added_by, added_at FROM quotes WHERE id=$1", ID)
 	if err != nil {
 		s.ChannelMessageSend(chID, "An Error Occurred while getting the quote")
 		fmt.Println(err.Error())

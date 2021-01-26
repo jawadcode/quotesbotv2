@@ -10,7 +10,7 @@ QuotesBot is a bot that allows you to save and recall quotes (messages) ~~to bla
 - [x] Help
 - [x] Save quote
 - [x] Get recent quotes
-- [ ] Get quote by ID
+- [x] Get quote by ID
 - [ ] Search through quotes
 - [ ] Delete quote
 

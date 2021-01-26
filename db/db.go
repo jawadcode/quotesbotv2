@@ -5,6 +5,7 @@ import (
 	_ "github.com/lib/pq" // This is required by sqlx to be able to connect to postgres
 
 	"fmt"
+	"io/ioutil"
 	"os"
 )
 
@@ -62,18 +63,11 @@ func DBInit() {
 	if err != nil {
 		panic(err)
 	}
-	// Schema that creates the quotes table if it does not exist
-	schema := `
-	CREATE TABLE IF NOT EXISTS quotes (
-		id SERIAL,
-		guild_id BIGINT NOT NULL,
-		channel_id BIGINT NOT NULL,
-		message_id BIGINT NOT NULL,
-		content text NOT NULL,
-		author BIGINT NOT NULL,
-		added_by BIGINT NOT NULL,
-		added_at BIGINT NOT NULL
-	);`
-	// Execute the schema and if it fails then panic
-	DB.MustExec(schema)
+	// Load schema from file
+	schema, err := ioutil.ReadFile("./schema.sql")
+	if err != nil {
+		panic(err)
+	}
+	// Execute schema (panics on failure)
+	DB.MustExec(string(schema))
 }

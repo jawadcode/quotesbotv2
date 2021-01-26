@@ -1,4 +1,3 @@
-// This is the root file for the handlers sub-package, this mostly contains helpers and constants
 package handlers
 
 import "github.com/bwmarrin/discordgo"
@@ -15,6 +14,8 @@ type (
 const (
 	// PREFIX is the prefix for every command
 	PREFIX = "Q!"
-	// COLOUR is a ice bright discord orange colour int
+	// COLOUR is a nice bright discord orange colour int
 	COLOUR = 0xFAA61A
+	// URL is the URL that all message links start with
+	URL = "https://discord.com/channels/"
 )

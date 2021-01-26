@@ -11,7 +11,7 @@ QuotesBot is a bot that allows you to save and recall quotes (messages) ~~to bla
 - [x] Save quote
 - [x] Get recent quotes
 - [x] Get quote by ID
-- [ ] Search through quotes
+- [x] Search through quotes (Full-Text search)
 - [ ] Delete quote
 
 ## Made With:

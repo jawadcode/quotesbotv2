@@ -81,5 +81,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			return
 		}
 		handlers.GetQuote(s, m, args[1])
+	case "search":
+		if len(args) < 2 {
+			s.ChannelMessageSend(m.ChannelID, "Incorrect usage of command `search`")
+			handlers.Help(s, m)
+			return
+		}
+		handlers.SearchQuotes(s, m, args[1:])
 	}
 }

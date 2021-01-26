@@ -74,5 +74,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			args = append(args, "15")
 		}
 		handlers.RecentQuotes(s, m, args[1])
+	case "get":
+		if len(args) < 2 {
+			s.ChannelMessageSend(m.ChannelID, "Incorrect usage of command `get`")
+			handlers.Help(s, m)
+			return
+		}
+		handlers.GetQuote(s, m, args[1])
 	}
 }

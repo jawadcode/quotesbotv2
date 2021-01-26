@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/jawadcode/quotesbotv2/db"
@@ -36,6 +37,7 @@ func embedQuote(s *discordgo.Session, chID string, quote *db.Quote) *discordgo.M
 				Value: link,
 			},
 		},
-		Color: COLOUR,
+		Timestamp: time.Unix(0, int64(quote.AddedAt)).Format(time.RFC3339),
+		Color:     COLOUR,
 	}
 }

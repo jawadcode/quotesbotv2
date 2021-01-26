@@ -48,27 +48,30 @@ func SaveQuote(s *discordgo.Session, m *discordgo.MessageCreate) {
 			return
 		}
 	}
-
 	if message == nil {
 		s.ChannelMessageSend(chID, "Message Not Found :(")
 		return
 	}
 	// Create Quote struct to insert into the database
 	quote := db.QuoteSave{
-		Content: message.Content,
-		Author:  message.Author.ID,
-		AddedBy: m.Message.Author.ID,
-		AddedAt: uint64(time.Now().UnixNano()),
+		GuildID:   m.GuildID,
+		ChannelID: chID,
+		MessageID: message.ID,
+		Content:   message.Content,
+		Author:    message.Author.ID,
+		AddedBy:   m.Message.Author.ID,
+		AddedAt:   uint64(time.Now().UnixNano()),
 	}
 	// Insert into DB and catch any errors
 	rows, err := db.DB.NamedQuery(
-		`INSERT INTO quotes (content, author, added_by, added_at)
-			 VALUES (:content, :author, :added_by, :added_at)
+		`INSERT INTO quotes (guild_id, channel_id, message_id, content, author, added_by, added_at)
+			 VALUES (:guild_id, :channel_id, :message_id, :content, :author, :added_by, :added_at)
 		RETURNING id`,
 		&quote,
 	)
-	if rows.Err() != nil || err != nil {
+	if err != nil {
 		s.ChannelMessageSend(m.ChannelID, "An Error Occurred while saving the quote :(")
+		fmt.Println(err.Error())
 		return
 	}
 

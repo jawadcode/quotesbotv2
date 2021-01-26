@@ -10,10 +10,13 @@ import (
 
 // QuoteSave is a struct used to insert a row into the 'quotes' table
 type QuoteSave struct {
-	Content string `db:"content"`
-	Author  string `db:"author"`
-	AddedBy string `db:"added_by"`
-	AddedAt uint64 `db:"added_at"`
+	GuildID   string `db:"guild_id"`
+	ChannelID string `db:"channel_id"`
+	MessageID string `db:"message_id"`
+	Content   string `db:"content"`
+	Author    string `db:"author"`
+	AddedBy   string `db:"added_by"`
+	AddedAt   uint64 `db:"added_at"`
 }
 
 // QuotePreview is a struct used to hold a preview of a row from the 'quotes' table
@@ -24,11 +27,14 @@ type QuotePreview struct {
 
 // Quote is a struct used to hold a row from the 'quotes' table
 type Quote struct {
-	ID      uint64 `db:"id"`
-	Content string `db:"content"`
-	Author  string `db:"author"`
-	AddedBy string `db:"added_by"`
-	AddedAt uint64 `db:"added_at"`
+	ID        uint64 `db:"id"`
+	GuildID   string `db:"guild_id"`
+	ChannelID string `db:"channel_id"`
+	MessageID string `db:"message_id"`
+	Content   string `db:"content"`
+	Author    string `db:"author"`
+	AddedBy   string `db:"added_by"`
+	AddedAt   uint64 `db:"added_at"`
 }
 
 // DB is a Reusable variable for db connection
@@ -60,10 +66,13 @@ func DBInit() {
 	schema := `
 	CREATE TABLE IF NOT EXISTS quotes (
 		id SERIAL,
-		content text,
-		author BIGINT,
-		added_by BIGINT,
-		added_at BIGINT
+		guild_id BIGINT NOT NULL,
+		channel_id BIGINT NOT NULL,
+		message_id BIGINT NOT NULL,
+		content text NOT NULL,
+		author BIGINT NOT NULL,
+		added_by BIGINT NOT NULL,
+		added_at BIGINT NOT NULL
 	);`
 	// Execute the schema and if it fails then panic
 	DB.MustExec(schema)

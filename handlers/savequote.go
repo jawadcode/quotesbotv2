@@ -71,7 +71,6 @@ func SaveQuote(s *discordgo.Session, m *discordgo.MessageCreate) {
 	)
 	if err != nil {
 		s.ChannelMessageSend(m.ChannelID, "An Error Occurred while saving the quote :(")
-		fmt.Println(err.Error())
 		return
 	}
 
